@@ -79,7 +79,7 @@
                     </li>
                     @else
                     <li class="nav-item">
-                        <a class="nav-link btn-logout" href="{{ route('signout') }}" onclick="return confirm('Nghỉ tay thiệt hả Pro?')">
+                        <a class="nav-link btn-logout" href="{{ route('signout') }}" onclick="return confirm('Bạn có muốn thoát không?')">
                             <i class="fas fa-sign-out-alt"></i> Đăng xuất
                         </a>
                     </li>
