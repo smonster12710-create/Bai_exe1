@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
+use Hash;
+use Session;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +58,7 @@ class CrudUserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
+            'Like' => 'required|string|unique:users',
             'password' => 'required|min:6',
         ]);
 
@@ -66,7 +67,7 @@ class CrudUserController extends Controller
             'name' => $data['name'],
             'phone' => $data['phone'],
             'address' => $data['address'],
-            'like' => $data['like'],
+            'Like' => $data['Like'],
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
         ]);
@@ -115,16 +116,15 @@ class CrudUserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
+            'Like' => 'required|string|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
-            'like' => 'required',
         ]);
 
        $user = User::find($input['id']);
        $user->name = $input['name'];
        $user->email = $input['email'];
+       $user->Like = $input['Like'];
        $user->password = $input['password'];
-        $user->like = $input['like'];
-       
        $user->save();
 
         return redirect("list")->withSuccess('You have signed-in');
